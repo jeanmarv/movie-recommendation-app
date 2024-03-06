@@ -1,19 +1,14 @@
-import { Router } from 'express';
+const { Router } = require('express');
+const userController = require('../controllers/userController');
 // import UserController from '../controllers/userControllers';
 // import ValidateUsers from '../middlewares/validateUsers';
-
-// const userController = new UserController();
 // const validateUsers = new ValidateUsers();
 
 const route = Router();
 
 route.post(
   '/', 
-//   validateUsers.validateUsername,
-//   validateUsers.validateClasse,
-//   validateUsers.validateLevel,
-//   validateUsers.validatePassword,
-//   userController.postUser,
+  userController.validateLoginCont,
 );
 
-export default route; 
+module.exports = route;
