@@ -1,4 +1,4 @@
-import { Router } from 'express';
+const { Router } = require('express');
 // import ProductController from '../controllers/productControllers';
 // import ValidateProducts from '../middlewares/validateProducts';
 
@@ -14,4 +14,4 @@ route.post(
 //   productcontroller.postProduct,
 );
 
-export default route; 
+module.exports = route;
