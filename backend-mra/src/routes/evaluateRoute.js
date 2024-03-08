@@ -1,4 +1,4 @@
-import { Router } from 'express';
+const { Router } = require('express');
 // import ProductController from '../controllers/productControllers';
 // import ValidateProducts from '../middlewares/validateProducts';
 
@@ -8,10 +8,10 @@ import { Router } from 'express';
 const route = Router();
 
 route.post(
-  '/recommend', 
+  '/evaluate', 
 //   validateProducts.validateName,
 //   validateProducts.validateAmount, 
 //   productcontroller.postProduct,
 );
 
-export default route; 
+module.exports = route;
