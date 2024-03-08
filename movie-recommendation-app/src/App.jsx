@@ -1,4 +1,3 @@
-import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Main from './pages/main';
 import Recommend from './pages/recommend';
@@ -8,7 +7,7 @@ import Evaluate from './pages/evaluate';
 function App() {
   return (
     <Routes>
-      <Route path="/" element={ <Main /> } replace />
+      <Route path="/" element={ <Main /> } />
       <Route path="/recommend" element={ <Recommend /> } />
       <Route path="/register" element={ <Register /> } />
       <Route path="/evaluate" element={ <Evaluate /> } />

@@ -1,4 +1,14 @@
+// import { Navigate } from "react-router-dom";
+import LoginForm from "../components/loginForm";
 
 export default function Main() {
-  return <h>LOGIN</h>;
+  // if (localStorage.user) return <Navigate to="/" />;
+  
+  
+  return (
+    <div>
+      <LoginForm/>
+        <p>LOGIN</p>
+    </div>
+  )
 }
