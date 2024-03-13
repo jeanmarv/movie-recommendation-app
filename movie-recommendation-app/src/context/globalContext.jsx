@@ -4,11 +4,18 @@ import PropTypes from 'prop-types';
 
 const GlobalContext = createContext();
 
+const defaultUser = {
+  id: "",
+  Username: "joao",
+  Password: "seilaeu",
+  movies: [],
+};
+
 export default GlobalContext;
 
 export function GlobalProvider({ children }) {
     const navigate = useNavigate();
-    const [user, setUser] = useState();
+    const [user, setUser] = useState(defaultUser);
     
     return (
       <GlobalContext.Provider

@@ -8,7 +8,6 @@ export default function Main() {
   return (
     <div>
       <LoginForm/>
-        <p>LOGIN</p>
     </div>
   )
 }

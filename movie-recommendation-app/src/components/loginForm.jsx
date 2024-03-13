@@ -1,14 +1,21 @@
 import { useContext } from 'react';
 import GlobalContext from "../context/globalContext";
+import { login } from '../api/requests';
 
 export default function LoginForm() {
     const {navigate, user, setUser} = useContext(GlobalContext)
 
     const MIN_PASSWORD_LENGTH = 6;
 
-    const handleclick = () => {
+    const handleClick = async () => {
+      const request = await login({Username: user.Username, Password: user.Password});
+      if (request.error) {
+        console.log(request.error);
+        return;
+      } else if (request.success) {
         navigate("/register");
-        return console.log(user)
+      }
+      console.log(request);
     }
 
     return (
@@ -19,8 +26,8 @@ export default function LoginForm() {
           <input
           type="text"
           placeholder="Username"
-          value={user.username}
-          onChange={(e) => setUser({ ...user, username: e.target.value })}
+          value={user.Username}
+          onChange={(e) => setUser({ ...user, Username: e.target.value })}
           />
         </label>
         <br />
@@ -29,15 +36,15 @@ export default function LoginForm() {
           <input
             type="password"
             placeholder="********"
-            value={user.password}
-            onChange={(e) => setUser({ ...user, password: e.target.value })}
+            value={user.Password}
+            onChange={(e) => setUser({ ...user, Password: e.target.value })}
           />
         </label>
         <br />
         <button 
             type="buttom"
-            onClick={ handleclick() }
-            disabled={ user.username.lenght < MIN_PASSWORD_LENGTH || user.password.lenght < MIN_PASSWORD_LENGTH }
+            onClick={handleClick}
+            disabled={ (user.Username.length < MIN_PASSWORD_LENGTH || user.Password.length < MIN_PASSWORD_LENGTH) }
         >
             Login
         </button>
