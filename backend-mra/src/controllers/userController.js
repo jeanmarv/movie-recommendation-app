@@ -1,4 +1,5 @@
 const userModel = require("../models/userModel");
+const moviesModel = require("../models/moviesModel");
 
 const validateLoginCont = async (req, res) => {
     const { Username, Password } = req.body;
@@ -7,7 +8,8 @@ const validateLoginCont = async (req, res) => {
         const user = await userModel.validateLogin(Username, Password);
 
         if (user) {
-            res.status(200).send(`Login bem-sucedido!${user}`);
+            const movies = await moviesModel.getUserMovies(user.id);
+            res.status(200).json(movies);
             console.log(user);
         } else {
             res.status(401).send('Credenciais inválidas. Por favor, tente novamente.');
@@ -25,7 +27,7 @@ const newUserCont = async (req, res) => {
         const newUser = await userModel.newUser(Username, Password);
 
         if (newUser) {
-            res.status(200).send('Usuário criado com sucesso!');
+            res.status(201).send('Usuário criado com sucesso!');
         } else {
             res.status(400).send('Erro ao criar usuário. Por favor, tente novamente.');
         }

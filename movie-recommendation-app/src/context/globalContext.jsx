@@ -6,8 +6,8 @@ const GlobalContext = createContext();
 
 const defaultUser = {
   id: "",
-  Username: "joao",
-  Password: "seilaeu",
+  Username: "jeanmarv",
+  Password: "jean121bol",
   movies: [],
 };
 

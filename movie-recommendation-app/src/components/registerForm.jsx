@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import GlobalContext from "../context/globalContext";
+import { register } from "../api/requests";
 
 export default function RegisterForm () {
 
@@ -7,9 +8,11 @@ export default function RegisterForm () {
 
     const MIN_PASSWORD_LENGTH = 6;
 
-    const handleClick = () => {
-        navigate("/evaluate");
-        return console.log(user)
+    const handleClick = async () => {
+        const request = await register({Username: user.Username, Password: user.Password});
+        if (request.status === 201) {
+            navigate("/");
+        }
     }
 
     return (
@@ -35,7 +38,7 @@ export default function RegisterForm () {
                     />
                 </label>
                 <button 
-                    type="buttom"
+                    type="button"
                     onClick={handleClick}
                     disabled={ (user.Username.length < MIN_PASSWORD_LENGTH || user.Password.length < MIN_PASSWORD_LENGTH) }
                 >

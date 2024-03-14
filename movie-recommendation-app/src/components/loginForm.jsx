@@ -9,13 +9,14 @@ export default function LoginForm() {
 
     const handleClick = async () => {
       const request = await login({Username: user.Username, Password: user.Password});
-      if (request.error) {
-        console.log(request.error);
-        return;
-      } else if (request.success) {
-        navigate("/register");
-      }
-      console.log(request);
+        if (request.status === 200) {
+          if (request.data.length >= 10) {
+            navigate("/recommend");
+          }
+          else {
+            navigate("/evaluate");
+          }
+        }
     }
 
     return (
@@ -42,7 +43,7 @@ export default function LoginForm() {
         </label>
         <br />
         <button 
-            type="buttom"
+            type="button"
             onClick={handleClick}
             disabled={ (user.Username.length < MIN_PASSWORD_LENGTH || user.Password.length < MIN_PASSWORD_LENGTH) }
         >
