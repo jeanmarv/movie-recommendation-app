@@ -13,7 +13,8 @@ const defaultUser = {
 
 const starterMovies = [ "The Godfather", "Inception", "Pulp Fiction", "Schindler's List", "Toy Story", "The Shawshank Redemption", "Mad Max: Fury Road", 
 "Amélie", "Parasite", "The Dark Knight", "La La Land", "2001: A Space Odyssey", "The Silence of the Lambs", "Spirited Away", "The Grand Budapest Hotel",
-"Fight Club", "Forrest Gump", "Moonlight", "Blade Runner 2049","Casablanca" ]
+"Fight Club", "Forrest Gump", "Moonlight", "Blade Runner 2049","Casablanca", "Citizen Kane", "Vertigo", "Star Wars: Episode IV - A New Hope", "Jurassic Park",
+"The Matrix","12 Angry Men", "Eternal Sunshine of the Spotless Mind", "Gladiator", "Saving Private Ryan", "Goodfellas" ]
 
 export default GlobalContext;
 
