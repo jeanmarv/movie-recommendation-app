@@ -9,8 +9,12 @@ const validateLoginCont = async (req, res) => {
 
         if (user) {
             const movies = await moviesModel.getUserMovies(user.id);
-            res.status(200).json(movies);
-            console.log(user);
+            if (movies && movies.length > 0) {
+                res.status(200).json(movies);
+            }
+            else {
+                res.status(200).json(user.id);
+            }
         } else {
             res.status(401).send('Credenciais inválidas. Por favor, tente novamente.');
         }

@@ -11,11 +11,16 @@ const defaultUser = {
   movies: [],
 };
 
+const starterMovies = [ "The Godfather", "Inception", "Pulp Fiction", "Schindler's List", "Toy Story", "The Shawshank Redemption", "Mad Max: Fury Road", 
+"Amélie", "Parasite", "The Dark Knight", "La La Land", "2001: A Space Odyssey", "The Silence of the Lambs", "Spirited Away", "The Grand Budapest Hotel",
+"Fight Club", "Forrest Gump", "Moonlight", "Blade Runner 2049","Casablanca" ]
+
 export default GlobalContext;
 
 export function GlobalProvider({ children }) {
     const navigate = useNavigate();
     const [user, setUser] = useState(defaultUser);
+    const [ staMovies ] = useState(starterMovies);
     
     return (
       <GlobalContext.Provider
@@ -23,6 +28,7 @@ export function GlobalProvider({ children }) {
           navigate,
           user,
           setUser,
+          staMovies,
         } }
       >
         {children}
