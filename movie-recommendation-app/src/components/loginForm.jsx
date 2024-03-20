@@ -9,15 +9,11 @@ export default function LoginForm() {
 
     const handleClick = async () => {
       const request = await login({Username: user.Username, Password: user.Password});
-
+        if (request.status === 202) {
+          navigate(`/evaluate/${request.data}`)
+        }
         if (request.status === 200) {
-          if (request.data.length >= 10) {
-            const client_id = request.data[0].user_id;
-            navigate(`/recommend/${client_id}`);
-          }
-          else {
-            navigate(`/evaluate/${request.data}`);
-          }
+          navigate(`/recommend/${request.data}`);
         }
     }
 

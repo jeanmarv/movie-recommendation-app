@@ -2,7 +2,7 @@ const connection = require("./connections");
 
 const getUserMovies = async (userId) => {
     try {
-        const [rows] = await connection.execute('SELECT * FROM `movie-recommendation-app`.Filmes WHERE user_id = ?', [userId]);
+        const [rows] = await connection.execute('SELECT filme, evaluation FROM `movie-recommendation-app`.Filmes WHERE user_id = ?', [userId]);
         return rows;
     } catch (error) {
         console.error('Erro ao obter os filmes do usuário:', error);

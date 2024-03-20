@@ -17,7 +17,7 @@ app.use((req, res, next) => {
 
 app.use('/', mainRoute);
 app.use('/register', registerRoute);
-app.use('/evaluate/:clientId', evaluateRoute);
-app.use('/recommend/:clientId', recommendRoute);
+app.use('/evaluate', evaluateRoute);
+app.use('/recommend', recommendRoute);
 
 module.exports = app;

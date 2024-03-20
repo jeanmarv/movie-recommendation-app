@@ -23,15 +23,15 @@ const register = async (userData) => {
   }
 }
 
-// const getMoviesID = async (userData) => {
-//   try {
-//     const response = await axios.get(`${URL}/`, userData);
-//     return response;
-//   } catch (error) {
-//     console.error('Erro ao fazer requisição de movies:', error);
-//     throw error; // Lança o erro para que ele possa ser tratado no componente que faz a chamada
-//   }
-// }
+const getMoviesID = async (clientId) => {
+  try {
+    const response = await axios.get(`${URL}/recommend/${clientId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Erro ao fazer requisição de movies:', error);
+    throw error; // Lança o erro para que ele possa ser tratado no componente que faz a chamada
+  }
+}
 
 const addMovie = async (userData) => {
   try {
@@ -43,4 +43,4 @@ const addMovie = async (userData) => {
   }
 }
 
-export { login, register, addMovie };
+export { login, register, addMovie, getMoviesID };
