@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
-import { getMoviesID } from "../api/requests";
+import { getMoviesID, addMovie } from "../api/requests";
 
 export default function RecommendMovies() {
     const [userMovies, setUserMovies] = useState([]);
@@ -18,13 +18,56 @@ export default function RecommendMovies() {
     return <div>Carregando...</div>;
 }
 
-// Uma vez que os dados estão prontos, renderiza a lista de filmes
+    const handleClick = async (event) => {
+        console.log(event.target.value);
+    }
+
+// Uma vez que os dados estão prontos, renderiza o filme recomendado pela api
 return (
     <div>
-        {userMovies.map((movie) => (
-            <div key={1}>{movie.filme} - {movie.evaluation}</div>
-        ))}
-        É ISSO AI
+      Recommended movie:
+      <button
+        onClick={ handleClick }
+        value={"1"}
+        type="button"
+      >
+        1 estrela
+      </button>
+      <button
+        onClick={ handleClick }
+        value={"2"}
+        type="button"
+      >
+        2 estrelas
+      </button>
+      <button
+        onClick={ handleClick }
+        value={"3"}
+        type="button"
+      >
+        3 estrelas
+      </button>
+      <button
+        onClick={ handleClick }
+        value={"4"}
+        type="button"
+      >
+        4 estrelas
+      </button>
+      <button
+        onClick={ handleClick }
+        value={"5"}
+        type="button"
+      >
+        5 estrelas
+      </button>
+      <button
+        onClick={ handleClick }
+        value={"6"}
+        type="button"
+      >
+        Me recomende outro
+      </button>
     </div>
 )
 }
