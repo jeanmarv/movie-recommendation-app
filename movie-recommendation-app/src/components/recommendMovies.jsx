@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
-import { getMoviesID, addMovie } from "../api/requests";
+import { getMoviesID } from "../api/requests";
+import { GPT_KEY } from '../../key';
+import OpenAI from "openai";
 
 export default function RecommendMovies() {
     const [userMovies, setUserMovies] = useState([]);
@@ -12,20 +14,39 @@ export default function RecommendMovies() {
             setUserMovies(movies);
         };
         fetchMovies();
+        console.log(userMovies);
     }, []);
  // Renderiza uma mensagem de carregamento enquanto os dados estão sendo buscados
- if (!userMovies || userMovies.length === 0) {
-    return <div>Carregando...</div>;
-}
+ 
+    const openai = new OpenAI({
+      apiKey: GPT_KEY,
+      dangerouslyAllowBrowser: true
+    });
+
+
+const chatCompletion = async (message) => {
+    const response = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo",
+      messages: [{ role: "user", content: message }],
+    });
+    return response.choices[0].message.content;
+  }
 
     const handleClick = async (event) => {
         console.log(event.target.value);
     }
 
+
 // Uma vez que os dados estão prontos, renderiza o filme recomendado pela api
-return (
+if (userMovies || userMovies.length > 0) {return (
     <div>
       Recommended movie:
+      {userMovies.map((movie) => (
+        <div key={"cjave"}>
+          <h3>{movie.filme}</h3>
+          <p>{movie.evaluation}</p>
+        </div>
+      ))}
       <button
         onClick={ handleClick }
         value={"1"}
@@ -69,5 +90,5 @@ return (
         Me recomende outro
       </button>
     </div>
-)
+)}
 }
