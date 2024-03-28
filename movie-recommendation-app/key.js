@@ -1,3 +1,3 @@
-const GPT_KEY = "??"
+const GPT_KEY = ""
 
 export { GPT_KEY };

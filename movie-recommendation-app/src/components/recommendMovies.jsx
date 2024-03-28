@@ -1,22 +1,21 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
-import { getMoviesID } from "../api/requests";
+import { getMoviesID, addMovie } from "../api/requests";
 import { GPT_KEY } from '../../key';
 import OpenAI from "openai";
 
 export default function RecommendMovies() {
-    const [userMovies, setUserMovies] = useState([]);
-    const [recommendedMovie, setRecommendedMovie] = useState(null);
-    const { clientId  } = useParams();
+  const [userMovies, setUserMovies] = useState([]);
+  const [recommendedMovie, setRecommendedMovie] = useState(null);
+  const { clientId  } = useParams();
 
-    useEffect(() => {
-        const fetchMovies = async () => {
-            const movies = await getMoviesID(clientId);
-            setUserMovies(movies);
-        };
-        fetchMovies();
-        console.log(userMovies);
-    }, []);
+  useEffect(() => {
+      const fetchMovies = async () => {
+          const movies = await getMoviesID(clientId);
+          setUserMovies(movies);
+      };
+      fetchMovies();
+  }, []);
  // Renderiza uma mensagem de carregamento enquanto os dados estão sendo buscados
  
 
@@ -27,7 +26,8 @@ export default function RecommendMovies() {
   });
 
   const fetchRecommendedMovie = async () => {
-      const message = `A partir da lista de filmes que vou te passar, analise o perfil cinematografico do usuario e volte o Nome de um novo filme como recomendação sem nenhum texto anterior nem posterior, esta é a lista ${userMovies}`;
+      console.log(userMovies)
+      const message = `This is a list of user's movies and evaluations of them:${userMovies}, Based on the user's preferences and evaluations, recommend a new movie title only`;
       const completion = await chatCompletion(openai, message);
       setRecommendedMovie(completion);
   };
@@ -42,13 +42,47 @@ const chatCompletion = async (openai, message) => {
       model: "gpt-3.5-turbo",
       messages: [{ role: "user", content: message }],
   });
-  return response.choices[0].message.content;
+  const recommendedMovieName = response.choices[0].message.content;
+  const recommendedMovieExists = userMovies.some(movie => movie.filme.toLowerCase() === recommendedMovieName.toLowerCase());
+
+  // Se o filme recomendado já estiver na lista de filmes do usuário, tenta novamente
+  if (recommendedMovieExists) {
+    return chatCompletion(openai, message);
+  }
+
+  return recommendedMovieName;
 }
+
+const handleEvaluation = async (evaluation) => {
+  const request = await addMovie({ user_id: clientId, filme: recommendedMovie, evaluation });
+  if (request.status === 201) {
+    console.log(request.status)
+  //   {
+  //     const fetchMovies = async () => {
+  //         const movies = await getMoviesID(clientId);
+  //         setUserMovies(movies);
+  //     };
+  //     fetchMovies();
+  // }
+  }
+};
 
 
 
 const handleClick = async (event) => {
-    console.log(event.target.value);
+  const value = event.target.value;
+  if (value === "1" || value === "2" || value === "3" || value === "4" || value === "5") {
+    handleEvaluation(Number(value));
+  } else if (value === "6") {
+    console.log(value)
+  //   {
+  //     const fetchMovies = async () => {
+  //         const movies = await getMoviesID(clientId);
+  //         setUserMovies(movies);
+  //     };
+  //     fetchMovies();
+  // }
+  }
 }
 
 if (userMovies.length === 0) {
