@@ -4,11 +4,24 @@ import PropTypes from 'prop-types';
 
 const GlobalContext = createContext();
 
+const defaultUser = {
+  id: "",
+  Username: "jeanmarv",
+  Password: "jean121bol",
+  movies: [],
+};
+
+const starterMovies = [ "The Godfather", "Inception", "Pulp Fiction", "Schindler's List", "Toy Story", "The Shawshank Redemption", "Mad Max: Fury Road", 
+"Amélie", "Parasite", "The Dark Knight", "La La Land", "2001: A Space Odyssey", "The Silence of the Lambs", "Spirited Away", "The Grand Budapest Hotel",
+"Fight Club", "Forrest Gump", "Moonlight", "Blade Runner 2049","Casablanca", "Citizen Kane", "Vertigo", "Star Wars: Episode IV - A New Hope", "Jurassic Park",
+"The Matrix","12 Angry Men", "Eternal Sunshine of the Spotless Mind", "Gladiator", "Saving Private Ryan", "Goodfellas" ]
+
 export default GlobalContext;
 
 export function GlobalProvider({ children }) {
     const navigate = useNavigate();
-    const [user, setUser] = useState();
+    const [user, setUser] = useState(defaultUser);
+    const [ staMovies ] = useState(starterMovies);
     
     return (
       <GlobalContext.Provider
@@ -16,6 +29,7 @@ export function GlobalProvider({ children }) {
           navigate,
           user,
           setUser,
+          staMovies,
         } }
       >
         {children}

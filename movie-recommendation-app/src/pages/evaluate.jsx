@@ -1,5 +1,6 @@
+import EvaluateMovies from "../components/evaluateMovies";
 
 export default function Evaluate() {
-    return <h>evaluate</h>;
+    return <EvaluateMovies/>;
   }
   
