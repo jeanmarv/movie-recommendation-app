@@ -1,0 +1,75 @@
+/* main.css */
+
+/* Container styles */
+.evaluate-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Title styles */
+  .evaluate-container h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+  }
+  
+  /* Movie title styles */
+  .evaluate-container .movie-title {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #555;
+  }
+  
+  /* Image styles */
+  .evaluate-container img {
+    width: 300px;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Button styles */
+  .evaluate-container button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+  
+  .evaluate-container button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .evaluate-container button:not(:last-child) {
+    margin-right: 10px;
+  }
+  
+  .evaluate-container button[value="6"] {
+    background-color: #6c757d;
+  }
+  
+  /* Add some responsive design */
+  @media (max-width: 480px) {
+    .evaluate-container img {
+      width: 100%;
+      height: auto;
+    }
+  
+    .evaluate-container button {
+      font-size: 14px;
+      padding: 8px 16px;
+    }
+  }
+  

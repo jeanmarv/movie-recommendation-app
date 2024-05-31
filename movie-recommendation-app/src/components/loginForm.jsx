@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import GlobalContext from "../context/globalContext";
 import { login } from '../api/requests';
+import "../css/main.css";
 
 export default function LoginForm() {
     const {navigate, user, setUser} = useContext(GlobalContext)
@@ -18,18 +19,18 @@ export default function LoginForm() {
     }
 
     return (
-    <div>
-      <form>
+      <div className="login-container">
+      <h1>MOVIE RECOMMENDATIONS</h1>
+      <form className="login-form">
         <label>
-            Login
+          Login
           <input
-          type="text"
-          placeholder="Username"
-          value={user.Username}
-          onChange={(e) => setUser({ ...user, Username: e.target.value })}
+            type="text"
+            placeholder="Username"
+            value={user.Username}
+            onChange={(e) => setUser({ ...user, Username: e.target.value })}
           />
         </label>
-        <br />
         <label>
           Password:
           <input
@@ -39,19 +40,18 @@ export default function LoginForm() {
             onChange={(e) => setUser({ ...user, Password: e.target.value })}
           />
         </label>
-        <br />
         <button 
-            type="button"
-            onClick={handleClick}
-            disabled={ (user.Username.length < MIN_PASSWORD_LENGTH || user.Password.length < MIN_PASSWORD_LENGTH) }
+          type="button"
+          onClick={handleClick}
+          disabled={(user.Username.length < MIN_PASSWORD_LENGTH || user.Password.length < MIN_PASSWORD_LENGTH)}
         >
-            Login
+          Login
         </button>
         <button
-            type="button"
-            onClick={() => navigate("/register")}
+          type="button"
+          onClick={() => navigate("/register")}
         >
-            Register
+          Register
         </button>
       </form>
     </div>
