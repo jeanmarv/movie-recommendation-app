@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import GlobalContext from "../context/globalContext";
 import { register } from "../api/requests";
+import "../css/register.css";
 
 export default function RegisterForm () {
 
@@ -16,9 +17,9 @@ export default function RegisterForm () {
     }
 
     return (
-        <div>
+        <div className="register-container">
             <h1>Register</h1>
-            <form>
+            <form className="register-form">
                 <label>
                     Login
                     <input
