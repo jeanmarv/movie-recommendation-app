@@ -35,12 +35,12 @@ export default function EvaluateMovies () {
       <h1>EVALUATE</h1>
       <div className="movie-title">{staMovies[index]}</div>
       <img src={staImages[index]} alt="movieImage" />
-      <button onClick={handleClick} value="1" type="button">1 estrela</button>
-      <button onClick={handleClick} value="2" type="button">2 estrelas</button>
-      <button onClick={handleClick} value="3" type="button">3 estrelas</button>
-      <button onClick={handleClick} value="4" type="button">4 estrelas</button>
-      <button onClick={handleClick} value="5" type="button">5 estrelas</button>
-      <button onClick={handleClick} value="6" type="button">Não assisti</button>
+      <button onClick={handleClick} value="1" type="button">1 star</button>
+      <button onClick={handleClick} value="2" type="button">2 stars</button>
+      <button onClick={handleClick} value="3" type="button">3 stars</button>
+      <button onClick={handleClick} value="4" type="button">4 stars</button>
+      <button onClick={handleClick} value="5" type="button">5 stars</button>
+      <button onClick={handleClick} value="6" type="button">Not yet watched</button>
     </div>
   ) 
 }
