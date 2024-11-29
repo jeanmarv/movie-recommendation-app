@@ -1,22 +1,27 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import GlobalContext from "../context/globalContext";
 import { login } from '../api/requests';
 import "../css/main.css";
 
 export default function LoginForm() {
     const {navigate, user, setUser} = useContext(GlobalContext)
+    const [errorMessage, setErrorMessage] = useState("");
 
     const MIN_PASSWORD_LENGTH = 6;
 
     const handleClick = async () => {
-      const request = await login({Username: user.Username, Password: user.Password});
-        if (request.status === 202) {
-          navigate(`/evaluate/${request.data}`)
-        }
-        if (request.status === 200) {
-          navigate(`/recommend/${request.data}`);
-        }
-    }
+      try {
+        const request = await login({Username: user.Username, Password: user.Password});
+          if (request.status === 202) {
+            navigate(`/evaluate/${request.data}`)
+          }
+          if (request.status === 200) {
+            navigate(`/recommend/${request.data}`);
+          }
+      } catch (error) {
+        setErrorMessage(<span style={{ color: 'red' }}>Invalid credentials, please try again.</span>);
+      }
+    };
 
     return (
       <div className="login-container">
@@ -40,6 +45,7 @@ export default function LoginForm() {
             onChange={(e) => setUser({ ...user, Password: e.target.value })}
           />
         </label>
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
         <button 
           type="button"
           onClick={handleClick}
