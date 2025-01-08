@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import GlobalContext from "../context/globalContext";
 import { useParams } from 'react-router-dom';
 import { getMoviesID, addMovie } from "../api/requests";
 import OpenAI from "openai";
 import "../css/recommend.css"
 
 export default function RecommendMovies() {
+  const {navigate, userID } = useContext(GlobalContext)
   const [userMovies, setUserMovies] = useState([]);
   const [recommendedMovie, setRecommendedMovie] = useState(null);
   const [seenMovie, setSeenMovie] = useState([]);
@@ -12,6 +14,12 @@ export default function RecommendMovies() {
   const { clientId  } = useParams();
   const GPT_KEY = import.meta.env.VITE_GPT_KEY;
   const TMDB_KEY = import.meta.env.VITE_TMDB_KEY;
+
+  useEffect(() => {
+    if (!userID || userID.toString() !== clientId) {
+      navigate("/");
+    }
+  }, [userID, clientId, navigate]);
 
   useEffect(() => {
       const fetchMovies = async () => {

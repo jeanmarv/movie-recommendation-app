@@ -4,7 +4,7 @@ import { login } from '../api/requests';
 import "../css/main.css";
 
 export default function LoginForm() {
-    const {navigate, user, setUser} = useContext(GlobalContext)
+    const {navigate, user, setUser, setUserID} = useContext(GlobalContext)
     const [errorMessage, setErrorMessage] = useState("");
 
     const MIN_PASSWORD_LENGTH = 6;
@@ -13,9 +13,13 @@ export default function LoginForm() {
       try {
         const request = await login({Username: user.Username, Password: user.Password});
           if (request.status === 202) {
+            setUserID(request.data);
+            localStorage.setItem('userID', request.data);
             navigate(`/evaluate/${request.data}`)
           }
           if (request.status === 200) {
+            setUserID(request.data);
+            localStorage.setItem('userID', request.data);
             navigate(`/recommend/${request.data}`);
           }
       } catch (error) {

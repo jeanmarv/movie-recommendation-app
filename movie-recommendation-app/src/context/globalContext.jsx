@@ -40,6 +40,7 @@ export function GlobalProvider({ children }) {
     const [user, setUser] = useState(defaultUser);
     const [ staMovies ] = useState(starterMovies);
     const [ staImages ] = useState(StarterImg);
+    const [ userID, setUserID ] = useState(localStorage.getItem('userID') || 0);
     
     return (
       <GlobalContext.Provider
@@ -49,6 +50,8 @@ export function GlobalProvider({ children }) {
           setUser,
           staMovies,
           staImages,
+          userID,
+          setUserID
         } }
       >
         {children}

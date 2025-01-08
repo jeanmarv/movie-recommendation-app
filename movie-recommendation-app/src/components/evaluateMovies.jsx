@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useContext } from 'react';
 import GlobalContext from "../context/globalContext";
 import { addMovie } from "../api/requests";
@@ -6,9 +6,15 @@ import { useParams } from 'react-router-dom';
 import "../css/evaluate.css";
 
 export default function EvaluateMovies () {
-  const { staMovies, navigate, staImages } = useContext(GlobalContext)
+  const { staMovies, navigate, staImages, userID } = useContext(GlobalContext)
   const [index, setIndex] = useState(0);
   const { clientId  } = useParams();
+
+  useEffect(() => {
+    if (!userID || userID.toString() !== clientId) {
+      navigate("/");
+    }
+  }, [userID, clientId, navigate]);
 
   const handleEvaluation = async (evaluation) => {
     const request = await addMovie({ user_id: clientId, filme: staMovies[index], evaluation });
